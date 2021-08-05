@@ -93,6 +93,7 @@ def main_function():
     sub_fin_list = []
     # refund_day_before_list = []
     # refund_list = []
+    print(ipo_upcoming_data)
 
     for row in ipo_upcoming_data.to_numpy():
         sub_start = datetime.strptime(row[1], "%Y-%m-%d")
@@ -102,7 +103,6 @@ def main_function():
         date_diff_sub_start = (today - sub_start).days
         date_diff_sub_fin = (today - sub_fin).days
         # date_diff_refund_date = (today - refund_date).days
-
 
         #청약 시작일 : 공모가/주간사 같이 print          // 시작 전날, 당일 Alarm
         if date_diff_sub_start == -1:
@@ -122,7 +122,7 @@ def main_function():
         else:
             break
 
-    print("!!청약 시작 하루전")
+    print("1. 청약 시작 하루 전 종목😃")
     print(sub_start_day_before_list)
     print("-------------------")
     print("!!청약 시작")
