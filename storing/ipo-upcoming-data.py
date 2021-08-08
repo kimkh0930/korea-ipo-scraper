@@ -5,8 +5,7 @@ import time
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from oauth2client.service_account import ServiceAccountCredentials
-from crawling_38com import WebInfo
-from crawling_38com import IpoData
+from crawling_38com import *
 
 #참고 : http://hleecaster.com/python-google-drive-spreadsheet-api/
 def get_google_spreadsheet(sheet_name):
@@ -34,7 +33,7 @@ def main_function():
     target_url = 'http://www.38.co.kr/html/fund/index.htm?o=k&page=%s'
     page_to_crawl = 3
     target_table_summary = '공모주 청약일정'
-    target_web = WebInfo(target_url, page_to_crawl, target_table_summary)
+    target_web = WebInfo(page_to_crawl, target_table_summary)
 
     for page in range(target_web._page, 0, -1):
         ipo_upcoming_data = IpoData.get_ipo_data_from_38com(target_web, page)
