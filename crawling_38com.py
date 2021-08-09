@@ -86,7 +86,6 @@ def get_bidding_date_before_table_info(table_data):
     share_price_high_list = []              #밴드 상단(희망 공모가 상단)
     public_offering_price_list = []         #확정 공모가
     underwriter_list = []                   #주간사
-    proportional_dist_ratio_list = []       #청약 경쟁률 -> 청약 끝나고 저잘할 때 씀.
 
     for i in range(0, len(table_data)):
         #청약 예정('#0066CC'), 청약 중인 종목('#E3231E')이 아니면 끝내기
@@ -115,7 +114,6 @@ def get_bidding_date_before_table_info(table_data):
                 share_price_high_list.append(data_list[3].split("~")[1])
                 public_offering_price_list.append(data_list[2])
                 underwriter_list.append(uw)
-                proportional_dist_ratio_list.append(data_list[4])
 
     bidding_date_before_info = pd.DataFrame({'종목명': company_list,
                                              '청약시작': subscription_start_list,
@@ -124,9 +122,7 @@ def get_bidding_date_before_table_info(table_data):
                                              '밴드하단': share_price_low_list,
                                              '밴드상단': share_price_high_list,
                                              '공모가': public_offering_price_list,
-                                             '비례경쟁률': proportional_dist_ratio_list,
                                              '주간사': underwriter_list})
-    print(bidding_date_before_info)
 
     return bidding_date_before_info[::-1] #역순으로 넣기
 
@@ -180,7 +176,6 @@ def get_bidding_date_after_table_info(table_data):
                                              '공모가': public_offering_price_list,
                                              '비례경쟁률': proportional_dist_ratio_list,
                                              '주간사': underwriter_list})
-    print(bidding_date_after_info)
 
     return bidding_date_after_info[::-1] #역순으로 넣기
 
@@ -198,7 +193,6 @@ def get_ipo_before_data_table_info(table_data):
             ipo_date = str(datetime.strptime(data_list[1].strip(), '%Y/%m/%d')).replace('-', '.')[:10]
 
             ipo_date_dict[company_name] = ipo_date
-    print(ipo_date_dict)
 
     return ipo_date_dict
 
@@ -226,7 +220,6 @@ def get_ipo_after_data_table_info(table_data):
 
         ipo_after_dict[company_name] = [ipo_date, opening_price, opening_price_ratio]
 
-    #print(ipo_after_dict)
     return ipo_after_dict
 
 #수요예측결과 테이블 crawling
@@ -245,5 +238,4 @@ def get_demand_forcast_result_table_info(table_data):
         commitment_ratio = data_list[6].strip()                     #의무보유 확약 비율(기관)
         demand_forcast_result_dict[company_name] = [ipo_amount, competition_ratio, commitment_ratio]
 
-    #print(demand_forcast_result_dict)
     return demand_forcast_result_dict
